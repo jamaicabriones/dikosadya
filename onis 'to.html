@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>CRUSH</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      height: 100vh;
+      margin: 0;
+      background: linear-gradient(-45deg, #ffdde1, #ee9ca7, #fbc2eb, #a6c1ee);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    h1 {
+      font-size: 3rem;
+      font-weight: 900;
+      color: #ff4d6d;
+      text-shadow: 2px 2px 5px white;
+      animation: popIn 0.8s ease-out;
+    }
+
+    @keyframes popIn {
+      0% { transform: scale(0); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .styled-img {
+      width: 250px;
+      height: auto;
+      border: 6px solid white;
+      border-radius: 1rem;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      margin: 1rem 0;
+      transition: transform 0.3s ease;
+    }
+
+    .styled-img:hover {
+      transform: rotate(-1deg) scale(1.05);
+    }
+
+    .move-away {
+      transition: all 0.3s ease-in-out;
+      position: relative;
+    }
+
+    button {
+      font-weight: bold;
+      letter-spacing: 1px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+
+    #videoModal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: rgba(0, 0, 0, 0.7);
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+      animation: fadeIn 0.5s ease;
+    }
+
+    .card {
+      background: white;
+      padding: 2rem;
+      border-radius: 1.5rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      animation: slideUp 0.5s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; } to { opacity: 1; }
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <h1>CRUSH MO BAKO HUUHHH BOYYY!!!???</h1>
+
+  <img src="c:\Users\jamaica briones\Downloads\8c8bae0a-58a6-40f8-8d5b-5461f7853dc6.jpeg" alt="Your image" class="styled-img" />
+
+  <div class="flex space-x-4 justify-center">
+    <button id="yesBtn" class="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-full text-lg transition">
+      YES 🥺
+    </button>
+    <button id="noBtn" class="move-away bg-red-500 hover:bg-red-600 text-white px-6 py-2 rounded-full text-lg transition">
+      NO 😬
+    </button>
+    <button id="maybeBtn" class="move-away bg-yellow-400 hover:bg-yellow-500 text-white px-6 py-2 rounded-full text-lg transition">
+      MAYBE 🤔
+    </button>
+  </div>
+
+  <!-- Modal -->
+  <div id="videoModal" class="fixed hidden items-center justify-center">
+    <div class="card text-center w-full max-w-[600px] px-6">
+      <div class="text-2xl font-bold text-pink-600 mb-4">ALAM KO NAMAAANNN!!! 😎</div>
+      <video id="reactionVideo" width="400" class="mx-auto mt-2 rounded-lg shadow-lg" controls style="display: none;">
+        <source src="c:\Users\jamaica briones\Downloads\hmm.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+      <button onclick="closeModal()" class="mt-6 bg-gray-800 hover:bg-gray-900 text-white px-5 py-2 rounded-full transition">
+        Close
+      </button>
+    </div>
+  </div>
+
+  <script>
+    const yesBtn = document.getElementById('yesBtn');
+    const noBtn = document.getElementById('noBtn');
+    const maybeBtn = document.getElementById('maybeBtn');
+    const modal = document.getElementById('videoModal');
+    const video = document.getElementById('reactionVideo');
+
+    function moveButton(btn) {
+      const randX = Math.floor(Math.random() * 300) - 150;
+      const randY = Math.floor(Math.random() * 150) - 75;
+      btn.style.transform = `translate(${randX}px, ${randY}px)`;
+    }
+
+    noBtn.addEventListener('mouseenter', () => moveButton(noBtn));
+    maybeBtn.addEventListener('mouseenter', () => moveButton(maybeBtn));
+
+    yesBtn.addEventListener('click', () => {
+      modal.style.display = 'flex';
+      modal.classList.remove('hidden');
+      if (video) {
+        video.style.display = 'block';
+        video.currentTime = 0;
+        video.play();
+      }
+    });
+
+    function closeModal() {
+      modal.style.display = 'none';
+      modal.classList.add('hidden');
+      if (video) {
+        video.pause();
+        video.currentTime = 0;
+        video.style.display = 'none';
+      }
+    }
+  </script>
+</body>
+</html>
